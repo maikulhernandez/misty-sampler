@@ -12,5 +12,16 @@
     "react": {
       "version": "latest"
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.ts",
+        "**/*.test.tsx"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }
