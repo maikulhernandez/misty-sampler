@@ -1,3 +1,4 @@
 module.exports = {
-  ...require("airbnb-typescript-prettier"),
-};
+  ...require('gts/.prettierrc.json')
+}
+ 
