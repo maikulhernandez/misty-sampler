@@ -53,9 +53,6 @@ const App: React.FC = () => {
           />
           <AudioFilter onFilterChange={onFilterChange}></AudioFilter>
           <div>
-            <br />
-            <br />
-            <br />
             Master Volume:
             <Fader
               min={-48}
