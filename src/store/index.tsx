@@ -7,5 +7,5 @@ export interface PlayerState {
 }
 
 export interface FilterState {
-  setFilter: (setState: {}) => void;
+  onFilterChange: (value: number) => void;
 }

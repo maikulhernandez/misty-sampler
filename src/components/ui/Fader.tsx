@@ -5,7 +5,7 @@ import './Fader.scss';
 interface FaderProps {
   min: number;
   max: number;
-  step: number;
+  step?: number;
   currentValue: number;
   onChange: (value: number) => void;
 }
@@ -13,7 +13,7 @@ interface FaderProps {
 const Fader: React.FC<FaderProps> = ({
   min,
   max,
-  step,
+  step = 1,
   currentValue,
   onChange,
 }) => {

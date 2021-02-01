@@ -95,8 +95,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
           onChange={handlePlaybackChange}
         />
       </div>
-      <br />
-      <br />
       <div>
         Loop Start:
         <Fader
@@ -107,8 +105,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
           onChange={handleLoopStartChange}
         />
       </div>
-      <br />
-      <br />
       <div>
         Loop End:
         <Fader

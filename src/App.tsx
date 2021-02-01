@@ -1,11 +1,13 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {Player, Filter} from 'tone';
+import {Player, Filter, Destination} from 'tone';
 import {appDeps} from './deps';
 import AudioPlayer from './components/AudioPlayer';
 import AudioFilter from './components/AudioFilter';
+import Fader from './components/ui/Fader';
 
 const App: React.FC = () => {
   const [isPlayerLoaded, setPlayerLoaded] = useState<boolean>(false);
+  const [volume, setVolume] = useState(0);
   const player = useRef<Player>();
   const filter = useRef<Filter>();
   const {
@@ -17,7 +19,9 @@ const App: React.FC = () => {
   } = appDeps.playerController({
     player: player.current,
   });
-  const {setFilter} = appDeps.filterController({filter: filter.current});
+  const {onFilterChange} = appDeps.filterController({
+    filter: filter.current,
+  });
 
   useEffect(() => {
     // Init app dependencies
@@ -31,6 +35,11 @@ const App: React.FC = () => {
     player.current.set({loop: true});
   }, []);
 
+  const handleMasterVolume = (value: number) => {
+    setVolume(value);
+    Destination.set({volume: volume});
+  };
+
   return (
     <div>
       {isPlayerLoaded ? (
@@ -42,10 +51,19 @@ const App: React.FC = () => {
             onRestart={onRestart}
             onInputChange={setAttribute}
           />
-          <br />
-          <br />
-          <br />
-          <AudioFilter setFilter={setFilter}></AudioFilter>
+          <AudioFilter onFilterChange={onFilterChange}></AudioFilter>
+          <div>
+            <br />
+            <br />
+            <br />
+            Master Volume:
+            <Fader
+              min={-48}
+              max={12}
+              currentValue={volume}
+              onChange={handleMasterVolume}
+            />
+          </div>
         </>
       ) : (
         'loading...'
