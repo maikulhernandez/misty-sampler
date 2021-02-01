@@ -42,6 +42,9 @@ const App: React.FC = () => {
             onRestart={onRestart}
             onInputChange={setAttribute}
           />
+          <br />
+          <br />
+          <br />
           <AudioFilter setFilter={setFilter}></AudioFilter>
         </>
       ) : (

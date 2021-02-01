@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {FilterState} from '../store';
 import {Filter} from 'tone';
+import Fader from './ui/Fader';
 
 export type FilterController = (props: {filter?: Filter}) => FilterState;
 
@@ -27,9 +28,9 @@ const AudioFilter: React.FC<AudioFilterProps> = ({setFilter}) => {
     return max + min - num;
   };
 
-  const changeFilter = (event: React.FormEvent<HTMLInputElement>) => {
-    const reversedFreq = reverseRange(Math.abs(freq), 0, 3000);
-    setFreq(parseFloat(event.currentTarget.value));
+  const changeFilter = (value: number) => {
+    const reversedFreq = reverseRange(Math.abs(freq), 0, 10000);
+    setFreq(value);
     if (freq >= 0) {
       setFilter({type: 'highpass', frequency: freq});
     } else if (freq < 0) {
@@ -41,15 +42,13 @@ const AudioFilter: React.FC<AudioFilterProps> = ({setFilter}) => {
     <div>
       <div>
         Bi Directional Filter:
-        <input
-          value={freq}
-          type="range"
-          min="-3000"
-          max="3000"
-          step="50"
+        <Fader
+          min={-10000}
+          max={10000}
+          step={50}
+          currentValue={freq}
           onChange={changeFilter}
         />
-        {freq}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {PlayerState} from '../store';
 import {Player} from 'tone';
+import Fader from './ui/Fader';
 
 export type PlayerController = (props: {player?: Player}) => PlayerState;
 
@@ -50,7 +51,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 }) => {
   const [playbackRate, setPlaybackRate] = useState(1);
   const [loopStart, setLoopStart] = useState(0);
-  const [loopEnd, setLoopEnd] = useState(1);
+  const [loopEnd, setLoopEnd] = useState(189); // placeholder
 
   const handleOnPlay = () => {
     onPlay?.call(this);
@@ -60,23 +61,20 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     onStop?.call(this);
   };
 
-  const handlePlaybackChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const parsedInputValue = parseFloat(event.currentTarget.value);
-    setPlaybackRate(parsedInputValue);
-    onInputChange?.call(this, {playbackRate: parsedInputValue});
+  const handlePlaybackChange = (value: number) => {
+    setPlaybackRate(value);
+    onInputChange?.call(this, {playbackRate: value});
   };
 
-  const handleLoopStartChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const parsedInputValue = parseFloat(event.currentTarget.value);
-    setLoopStart(parsedInputValue);
-    onInputChange?.call(this, {loopStart: parsedInputValue});
-    onRestart(parsedInputValue);
+  const handleLoopStartChange = (value: number) => {
+    setLoopStart(value);
+    onInputChange?.call(this, {loopStart: value});
+    onRestart(value);
   };
 
-  const handleLoopEndChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const parsedInputValue = parseFloat(event.currentTarget.value);
-    setLoopEnd(parsedInputValue);
-    onInputChange?.call(this, {loopEnd: parsedInputValue});
+  const handleLoopEndChange = (value: number) => {
+    setLoopEnd(value);
+    onInputChange?.call(this, {loopEnd: value});
   };
 
   return (
@@ -87,40 +85,39 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         <button onClick={handleOnPlay}>play</button>
       )}
       <div>
+        <br />
         Playback Rate:
-        <input
-          value={playbackRate}
-          type="range"
-          min="0.00"
-          max="3"
-          step="0.05"
+        <Fader
+          min={0}
+          max={3}
+          step={0.01}
+          currentValue={playbackRate}
           onChange={handlePlaybackChange}
         />
-        {playbackRate}
       </div>
+      <br />
+      <br />
       <div>
-        loopStart
-        <input
-          value={loopStart}
-          type="range"
-          min="0"
-          max="189"
-          step="1"
+        Loop Start:
+        <Fader
+          min={0}
+          max={189} // placerholder
+          step={0.01}
+          currentValue={loopStart}
           onChange={handleLoopStartChange}
         />
-        {loopStart}
       </div>
+      <br />
+      <br />
       <div>
-        loopEnd
-        <input
-          value={loopEnd}
-          type="range"
-          min="0"
-          max="189"
-          step="1"
+        Loop End:
+        <Fader
+          min={0}
+          max={189} // placeholder
+          step={0.01}
+          currentValue={loopEnd}
           onChange={handleLoopEndChange}
         />
-        {loopEnd}
       </div>
     </div>
   );
