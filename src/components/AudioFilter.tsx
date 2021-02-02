@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import appDeps from '../dependencies';
 import BiDirKnob from './ui/BiDirKnob';
 import {Filter} from 'tone';
+import {FilterController} from '../controllers/FilterController';
 
 interface AudioFilterProps {
   filter: Filter;
+  controller: FilterController;
 }
 
-const AudioFilter: React.FC<AudioFilterProps> = ({filter}) => {
+const AudioFilter: React.FC<AudioFilterProps> = ({filter, controller}) => {
   const [freq, setFreq] = useState(0);
-  const {onFilterChange} = appDeps.filterController({filter});
+  const {onFilterChange} = controller({filter});
 
   const changeFilter = (value: number) => {
     setFreq(value);
@@ -41,6 +42,7 @@ const AudioFilter: React.FC<AudioFilterProps> = ({filter}) => {
 
 AudioFilter.propTypes = {
   filter: PropTypes.instanceOf(Filter),
+  controller: PropTypes.func,
 };
 
 export default AudioFilter;
