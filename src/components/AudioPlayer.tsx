@@ -1,80 +1,44 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import {PlayerState} from '../store';
 import {Player} from 'tone';
+import PropTypes from 'prop-types';
 import Fader from './ui/Fader';
-
-export type PlayerController = (props: {player?: Player}) => PlayerState;
-
-export const usePlayerController: PlayerController = ({player}) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const onPlay = () => {
-    player?.start();
-    setIsPlaying(true);
-  };
-
-  const onStop = () => {
-    player?.stop();
-    setIsPlaying(false);
-  };
-
-  const onRestart = (loopStart: number) => {
-    player?.restart(loopStart);
-  };
-
-  const setAttribute = (setState: {
-    playbackRate?: number;
-    loopStart?: number;
-    loopEnd?: number;
-  }) => {
-    player?.set({...player?.get(), ...setState});
-  };
-
-  return {isPlaying, onStop, onPlay, onRestart, setAttribute};
-};
+import {PlayerController} from '../controllers/PlayerController';
 
 interface AudioPlayerProps {
-  isPlaying?: boolean;
-  onPlay?: () => void;
-  onStop?: () => void;
-  onRestart?: (value: number) => void;
-  onInputChange?: ({}) => void;
+  player: Player;
+  controller: PlayerController;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({
-  isPlaying,
-  onPlay,
-  onStop,
-  onRestart,
-  onInputChange,
-}) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
   const [playbackRate, setPlaybackRate] = useState(1);
   const [loopStart, setLoopStart] = useState(0);
   const [loopEnd, setLoopEnd] = useState(189); // placeholder
+  const {isPlaying, onPlay, onStop, onRestart, setAttribute} = controller({
+    player,
+  });
 
   const handleOnPlay = () => {
-    onPlay?.call(this);
+    onPlay();
   };
 
   const handleOnStop = () => {
-    onStop?.call(this);
+    onStop();
   };
 
   const handlePlaybackChange = (value: number) => {
     setPlaybackRate(value);
-    onInputChange?.call(this, {playbackRate: value});
+    setAttribute({playbackRate: value});
   };
 
   const handleLoopStartChange = (value: number) => {
     setLoopStart(value);
-    onInputChange?.call(this, {loopStart: value});
+    setAttribute({loopStart: value});
     onRestart(value);
   };
 
   const handleLoopEndChange = (value: number) => {
     setLoopEnd(value);
-    onInputChange?.call(this, {loopEnd: value});
+    setAttribute({loopEnd: value});
   };
 
   return (
@@ -99,7 +63,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         Loop Start:
         <Fader
           min={0}
-          max={189} // placerholder
+          max={189} // placeholder
           step={0.01}
           currentValue={loopStart}
           onChange={handleLoopStartChange}
@@ -120,11 +84,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 };
 
 AudioPlayer.propTypes = {
-  isPlaying: PropTypes.bool,
-  onPlay: PropTypes.func,
-  onStop: PropTypes.func,
-  onRestart: PropTypes.func,
-  onInputChange: PropTypes.func,
+  player: PropTypes.instanceOf(Player),
+  controller: PropTypes.func,
 };
 
 export default AudioPlayer;

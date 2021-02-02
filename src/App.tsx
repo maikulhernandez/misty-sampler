@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Player, Filter, Destination} from 'tone';
-import {appDeps} from './deps';
+import appDeps from './dependencies';
 import AudioPlayer from './components/AudioPlayer';
 import AudioFilter from './components/AudioFilter';
 import Fader from './components/ui/Fader';
@@ -10,18 +10,6 @@ const App: React.FC = () => {
   const [volume, setVolume] = useState(0);
   const player = useRef<Player>();
   const filter = useRef<Filter>();
-  const {
-    isPlaying,
-    onPlay,
-    onStop,
-    onRestart,
-    setAttribute,
-  } = appDeps.playerController({
-    player: player.current,
-  });
-  const {onFilterChange} = appDeps.filterController({
-    filter: filter.current,
-  });
 
   useEffect(() => {
     // Init app dependencies
@@ -39,19 +27,17 @@ const App: React.FC = () => {
     setVolume(value);
     Destination.set({volume: volume});
   };
+  console.log('app rendered');
 
   return (
     <div>
       {isPlayerLoaded ? (
         <>
           <AudioPlayer
-            isPlaying={isPlaying}
-            onPlay={onPlay}
-            onStop={onStop}
-            onRestart={onRestart}
-            onInputChange={setAttribute}
+            player={player.current}
+            controller={appDeps.playerController}
           />
-          <AudioFilter onFilterChange={onFilterChange}></AudioFilter>
+          <AudioFilter filter={filter.current}></AudioFilter>
           <div>
             Master Volume:
             <Fader

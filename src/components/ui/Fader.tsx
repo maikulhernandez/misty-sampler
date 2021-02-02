@@ -27,6 +27,7 @@ const Fader: React.FC<FaderProps> = ({
       <input
         type="range"
         className="fader"
+        list="midpoint"
         min={min}
         max={max}
         step={step}

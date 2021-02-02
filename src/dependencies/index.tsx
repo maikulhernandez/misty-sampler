@@ -1,6 +1,12 @@
 import {Player, Filter, FilterRollOff, ToneAudioNode, Destination} from 'tone';
-import {FilterController, useFilterController} from '../components/AudioFilter';
-import {PlayerController, usePlayerController} from '../components/AudioPlayer';
+import {
+  FilterController,
+  useFilterController,
+} from '../controllers/FilterController';
+import {
+  PlayerController,
+  usePlayerController,
+} from '../controllers/PlayerController';
 
 interface AppDeps {
   playerFactory: (
@@ -18,7 +24,7 @@ interface AppDeps {
   filterController: FilterController;
 }
 
-export const appDeps: AppDeps = {
+const appDeps: AppDeps = {
   playerFactory: (url, onLoad, fx) =>
     new Player(url, onLoad).chain(...(fx ?? []), Destination),
   playerController: usePlayerController,
@@ -26,3 +32,5 @@ export const appDeps: AppDeps = {
     new Filter(frequency, type, rolloff),
   filterController: useFilterController,
 };
+
+export default appDeps;
