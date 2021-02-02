@@ -33,7 +33,7 @@ export const usePlayerController: PlayerController = ({player}) => {
     loopStart?: number;
     loopEnd?: number;
   }) => {
-    player?.set({...player?.get(), ...setState});
+    player?.set({...setState});
   };
 
   return {isPlaying, onStop, onPlay, onRestart, setAttribute};

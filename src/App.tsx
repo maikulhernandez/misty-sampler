@@ -12,7 +12,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Init app dependencies
-    filter.current = appDeps.filterFactory(0, 'allpass', -48);
+    filter.current = appDeps.filterFactory(0, 'highpass', -48);
     player.current = appDeps.playerFactory(
       'heal-6.wav',
       () => setPlayerLoaded(true),
