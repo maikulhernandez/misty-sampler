@@ -28,7 +28,6 @@ const AudioFilter: React.FC<AudioFilterProps> = ({filter, controller}) => {
 
   const changeResonance = (event: React.FormEvent<HTMLInputElement>) => {
     const parsedInput = parseFloat(event.currentTarget.value);
-    console.log(parsedInput);
     setResonance(parsedInput);
     setResAmount(parsedInput);
   };
