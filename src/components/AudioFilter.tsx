@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import BiDirKnob from './ui/BiDirKnob';
+
+import Knob from './ui/Knob';
 import {Filter} from 'tone';
 import {FilterController} from '../controllers/FilterController';
 
@@ -11,31 +12,62 @@ interface AudioFilterProps {
 
 const AudioFilter: React.FC<AudioFilterProps> = ({filter, controller}) => {
   const [freq, setFreq] = useState(0);
-  const {onFilterChange} = controller({filter});
+  const [resonance, setResonance] = useState(0);
+  const {
+    changeCutoff,
+    setFilterType,
+    setResAmount,
+    adjusted,
+    freqType,
+  } = controller({filter});
 
-  const changeFilter = (value: number) => {
+  const changeFilterCutoff = (value: number) => {
     setFreq(value);
-    onFilterChange(value);
+    changeCutoff(value);
   };
 
-  // console.log('i ran');
+  const changeResonance = (event: React.FormEvent<HTMLInputElement>) => {
+    const parsedInput = parseFloat(event.currentTarget.value);
+    setResonance(parsedInput);
+    setResAmount(parsedInput);
+  };
 
   return (
     <div>
-      <div>
-        Bi Directional Filter: <br />
-        Filter Type: {freq >= 0 ? 'High Pass' : 'Low Pass'}
-        <BiDirKnob
-          size={75}
-          numTicks={150}
-          degrees={260}
-          min={-1}
-          max={1}
-          value={freq}
-          onChange={changeFilter}
-        />
-        {/* {Math.round(adjusted)} Hz */}
-      </div>
+      {freqType} Filter:
+      <br />
+      <br />
+      <Knob
+        size={100}
+        numTicks={150}
+        degrees={260}
+        min={0}
+        max={1}
+        value={freq}
+        onChange={changeFilterCutoff}
+      />
+      <br />
+      <br />
+      <br />
+      <button onClick={() => setFilterType('highpass')}>Highpass</button>
+      <button onClick={() => setFilterType('lowpass')}>Lowpass</button>
+      <button onClick={() => setFilterType('bandpass')}>Bandpass</button>
+      {freqType === 'bandpass' ? (
+        <div className="q-wrapper">
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={resonance}
+            onChange={changeResonance}
+          />
+          {resonance}
+        </div>
+      ) : (
+        ''
+      )}
+      <div>{adjusted} Hz</div>
     </div>
   );
 };

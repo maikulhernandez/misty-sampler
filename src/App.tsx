@@ -15,7 +15,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Init app dependencies
-    filter.current = appDeps.filterFactory(0, 'allpass', -48);
+    filter.current = appDeps.filterFactory(0, 'highpass', -48);
     eq.current = appDeps.eqFactory();
     player.current = appDeps.playerFactory(
       'heal-6.wav',

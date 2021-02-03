@@ -29,7 +29,7 @@ interface AppDeps {
 
   filterFactory: (
     frequency: number,
-    type: 'lowpass' | 'highpass' | 'allpass',
+    type: 'lowpass' | 'highpass' | 'bandpass',
     rolloff: FilterRollOff
   ) => Filter;
   filterController: FilterController;

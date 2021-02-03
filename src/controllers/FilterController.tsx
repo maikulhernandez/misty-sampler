@@ -1,34 +1,37 @@
+import {useState} from 'react';
 import {Filter} from 'tone';
 
 interface FilterState {
-  onFilterChange: (value: number) => void;
+  changeCutoff: (value: number) => void;
+  setFilterType: (value: 'lowpass' | 'highpass' | 'bandpass') => void;
+  setResAmount: (value: number) => void;
+  adjusted: number;
+  freqType: string;
 }
 
 export type FilterController = (props: {filter?: Filter}) => FilterState;
 
 export const useFilterController: FilterController = ({filter}) => {
-  const setFilter = (setState: {type?: 'lowpass' | 'highpass' | 'allpass'}) => {
-    filter?.set({...filter?.get(), ...setState});
-  };
+  const [adjusted, setAdjusted] = useState(0);
+  const [freqType, setFreqType] = useState('highpass');
 
-  const reverseRange = (num: number, min: number, max: number): number => {
-    return max + min - num;
-  };
-
-  const onFilterChange = (value: number) => {
+  const changeCutoff = (value: number) => {
     const max = Math.log(20000);
     const min = Math.log(20);
-    const reverseVal = reverseRange(Math.abs(value), 0, 1);
-    if (value >= 0) {
-      const highPassFreq = Math.floor(Math.exp(min + value * (max - min)));
-      setFilter({type: 'highpass'});
-      filter.frequency.rampTo(highPassFreq, 0.01);
-    } else {
-      const lowPassFreq = Math.floor(Math.exp(min + reverseVal * (max - min)));
-      setFilter({type: 'lowpass'});
-      filter.frequency.rampTo(lowPassFreq, 0.01);
-    }
+    const cutoffFreq = Math.floor(Math.exp(min + value * (max - min)));
+
+    setAdjusted(cutoffFreq);
+    filter.set({frequency: cutoffFreq});
   };
 
-  return {onFilterChange};
+  const setFilterType = (value: 'lowpass' | 'highpass' | 'bandpass') => {
+    setFreqType(value);
+    filter.set({type: value});
+  };
+
+  const setResAmount = (value: number) => {
+    filter.set({Q: value});
+  };
+
+  return {changeCutoff, setFilterType, setResAmount, adjusted, freqType};
 };

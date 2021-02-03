@@ -74,10 +74,8 @@ const Knob: React.FC<KnobProps> = ({
 
     const moveHandler = (e: MouseEvent): void => {
       currentDeg = getDeg(e.clientX, e.clientY, pts);
-      if (currentDeg === startAngle) currentDeg--;
-      let newValue = Math.floor(
-        convertRange(startAngle, endAngle, min, max, currentDeg)
-      );
+      // if (currentDeg === startAngle) currentDeg--;
+      let newValue = convertRange(startAngle, endAngle, min, max, currentDeg);
       setDegree(currentDeg);
       setOutputVal(newValue);
     };
