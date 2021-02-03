@@ -1,0 +1,18 @@
+.eq-knobs {
+  display: flex;
+  border: 1px solid black;
+  width: 32%;
+  margin-bottom: 15px;
+
+  .eq-knobs-low {
+    margin: 10px;
+  }
+  .eq-knobs-mid {
+    margin: 10px;
+    margin-left: 50px;
+  }
+  .eq-knobs-high {
+    margin: 10px;
+    margin-left: 50px;
+  }
+}
