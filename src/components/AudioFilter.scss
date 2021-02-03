@@ -1,0 +1,26 @@
+.filter-container {
+  border: 1px solid black;
+  margin-bottom: 20px;
+  width: 32%;
+  display: flex;
+  justify-content: space-around;
+  // justify-content: space-between;
+
+  .filter-label {
+    margin-bottom: 20px;
+  }
+  .filter-knob {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 50px;
+  }
+  .filter-selector {
+    flex-direction: column;
+    div {
+      margin: 15px;
+    }
+    .q-wrapper {
+      border: 1px solid black;
+    }
+  }
+}

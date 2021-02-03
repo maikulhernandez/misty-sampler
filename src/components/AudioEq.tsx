@@ -15,24 +15,24 @@ const AudioEq: React.FC<AudioEqProps> = ({eq, controller}) => {
   const [lowLevel, setLowLevel] = useState(0);
   const [midLevel, setMidLevel] = useState(0);
   const [highLevel, setHighLevel] = useState(0);
-  const {setAttribute} = controller({eq});
+  const {handleLowChange, handleMidChange, handleHighChange} = controller({eq});
 
   const changeLowEQ = (value: number) => {
     const roundedValue = Math.round(value);
     setLowLevel(roundedValue);
-    setAttribute({low: roundedValue});
+    handleLowChange(roundedValue);
   };
 
   const changeMidEQ = (value: number) => {
     const roundedValue = Math.round(value);
     setMidLevel(roundedValue);
-    setAttribute({mid: roundedValue});
+    handleMidChange(roundedValue);
   };
 
   const changeHighEQ = (value: number) => {
     const roundedValue = Math.round(value);
     setHighLevel(roundedValue);
-    setAttribute({high: roundedValue});
+    handleHighChange(roundedValue);
   };
 
   return (
