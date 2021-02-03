@@ -16,7 +16,7 @@ export const useEqController: EqController = ({eq}) => {
     eq?.set({mid: value});
   };
   const handleHighChange = (value: number) => {
-    eq?.set({mid: value});
+    eq?.set({high: value});
   };
 
   return {handleLowChange, handleMidChange, handleHighChange};
