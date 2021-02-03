@@ -12,6 +12,7 @@ const AudioMaster = () => {
 
   return (
     <div>
+      Master Volume:
       <Fader
         min={-48}
         max={12}
