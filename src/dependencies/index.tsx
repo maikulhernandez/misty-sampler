@@ -5,6 +5,7 @@ import {
   FilterRollOff,
   ToneAudioNode,
   Destination,
+  PitchShift,
 } from 'tone';
 import {
   FilterController,
@@ -15,6 +16,10 @@ import {
   usePlayerController,
 } from '../controllers/PlayerController';
 import {EqController, useEqController} from '../controllers/EqController';
+import {
+  PitchController,
+  usePitchController,
+} from '../controllers/PitchController';
 
 interface AppDeps {
   playerFactory: (
@@ -26,6 +31,9 @@ interface AppDeps {
 
   eqFactory: () => EQ3;
   eqController: EqController;
+
+  pitchFactory: () => PitchShift;
+  pitchController: PitchController;
 
   filterFactory: (
     frequency: number,
@@ -46,6 +54,9 @@ const appDeps: AppDeps = {
   filterFactory: (frequency, type, rolloff) =>
     new Filter(frequency, type, rolloff),
   filterController: useFilterController,
+
+  pitchFactory: () => new PitchShift(),
+  pitchController: usePitchController,
 };
 
 export default appDeps;
