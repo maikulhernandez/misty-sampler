@@ -76,8 +76,9 @@ const Knob: React.FC<KnobProps> = ({
       currentDeg = getDeg(e.clientX, e.clientY, pts);
       // if (currentDeg === startAngle) currentDeg--;
       let newValue = convertRange(startAngle, endAngle, min, max, currentDeg);
+      const knobOutputValue = parseFloat(newValue.toFixed(2));
       setDegree(currentDeg);
-      setOutputVal(newValue);
+      setOutputVal(knobOutputValue);
     };
     document.addEventListener('mousemove', moveHandler);
     // eslint-disable-next-line no-unused-vars

@@ -1,0 +1,17 @@
+.master-fader {
+  border: 1px solid black;
+  margin: 20px 0 100px 0;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 25px;
+    margin: 10px 20px;
+  }
+  &__fader {
+    margin: 10px;
+    margin-bottom: 50px;
+    width: 100%;
+  }
+}

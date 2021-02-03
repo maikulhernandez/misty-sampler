@@ -6,6 +6,7 @@ import {
   ToneAudioNode,
   Destination,
   PitchShift,
+  Chorus,
 } from 'tone';
 import {
   FilterController,
@@ -20,6 +21,10 @@ import {
   PitchController,
   usePitchController,
 } from '../controllers/PitchController';
+import {
+  ChorusController,
+  useChorusController,
+} from '../controllers/ChorusController';
 
 interface AppDeps {
   playerFactory: (
@@ -41,6 +46,9 @@ interface AppDeps {
     rolloff: FilterRollOff
   ) => Filter;
   filterController: FilterController;
+
+  chorusFactory: () => Chorus;
+  chorusController: ChorusController;
 }
 
 const appDeps: AppDeps = {
@@ -57,6 +65,9 @@ const appDeps: AppDeps = {
 
   pitchFactory: () => new PitchShift(),
   pitchController: usePitchController,
+
+  chorusFactory: () => new Chorus(),
+  chorusController: useChorusController,
 };
 
 export default appDeps;

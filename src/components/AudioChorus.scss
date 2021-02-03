@@ -1,0 +1,48 @@
+.chorus {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 45%;
+  margin-bottom: 15px;
+
+  .chorus-title {
+    margin: 10px 0 0 30px;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .chorus-button {
+    margin: 20px 0 10px 30px;
+  }
+  .chorus-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    &__amount {
+      margin: 10px 0;
+    }
+    &__depth {
+      margin: 10px 0;
+    }
+    &__spread {
+      margin: 10px 0;
+    }
+  }
+  .chorus-bottom {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    &__frequency {
+      margin: 10px 0;
+    }
+    &__delay {
+      margin: 10px 0;
+    }
+    &__feedback {
+      margin: 10px 0;
+    }
+  }
+}
