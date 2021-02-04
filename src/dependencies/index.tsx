@@ -7,6 +7,7 @@ import {
   Destination,
   PitchShift,
   Chorus,
+  FeedbackDelay,
 } from 'tone';
 import {
   FilterController,
@@ -25,6 +26,10 @@ import {
   ChorusController,
   useChorusController,
 } from '../controllers/ChorusController';
+import {
+  DelayController,
+  useDelayController,
+} from '../controllers/DelayController';
 
 interface AppDeps {
   playerFactory: (
@@ -49,6 +54,9 @@ interface AppDeps {
 
   chorusFactory: () => Chorus;
   chorusController: ChorusController;
+
+  delayFactory: () => FeedbackDelay;
+  delayController: DelayController;
 }
 
 const appDeps: AppDeps = {
@@ -68,6 +76,9 @@ const appDeps: AppDeps = {
 
   chorusFactory: () => new Chorus(),
   chorusController: useChorusController,
+
+  delayFactory: () => new FeedbackDelay(),
+  delayController: useDelayController,
 };
 
 export default appDeps;
