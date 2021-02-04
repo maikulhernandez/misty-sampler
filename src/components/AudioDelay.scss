@@ -1,43 +1,26 @@
-.chorus {
+.delay {
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 45%;
-  margin-bottom: 15px;
 
-  .chorus-title {
+  .delay-title {
     margin: 10px 0 0 30px;
     font-size: 30px;
     font-family: 'Courier New', Courier, monospace;
   }
-  .chorus-button {
-    margin: 20px 0 10px 30px;
-  }
-  .chorus-top {
+  .delay-row {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    margin-bottom: 40px;
+
     &__amount {
       margin: 10px 0;
     }
-    &__depth {
-      margin: 10px 0;
-    }
-    &__spread {
-      margin: 10px 0;
-    }
-  }
-  .chorus-bottom {
-    margin-top: 20px;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    &__frequency {
-      margin: 10px 0;
-    }
-    &__delay {
+
+    &__delayTime {
       margin: 10px 0;
     }
     &__feedback {

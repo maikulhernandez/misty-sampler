@@ -148,9 +148,6 @@ const AudioChorus: React.FC<AudioChorusProps> = ({chorus, controller}) => {
           />
         </div>
       </div>
-      <br />
-      <br />
-      <br />
     </div>
   );
 };
