@@ -17,17 +17,10 @@ const AudioFilter: React.FC<AudioFilterProps> = ({filter, controller}) => {
   const [resonance, setResonance] = useState(0);
   const [filtType, setFiltType] = useState('highpass');
 
-  const {handleParameterChange} = controller({filter});
-
-  const convertRange = (min: number, max: number, value: number) => {
-    const newMin = Math.log(min);
-    const newMax = Math.log(max);
-    const newRange = Math.floor(Math.exp(newMin + value * (newMax - newMin)));
-    return newRange;
-  };
+  const {handleParameterChange, convertRange} = controller({filter});
 
   const changeFilterCutoff = (value: number) => {
-    const cutoffFrequency = convertRange(20, 20000, value);
+    const cutoffFrequency = convertRange(value);
     setFreq(value);
     setAdjustedFreq(cutoffFrequency);
     handleParameterChange({frequency: cutoffFrequency});
