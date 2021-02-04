@@ -1,5 +1,13 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {Player, EQ3, Filter, PitchShift, Chorus, FeedbackDelay} from 'tone';
+import {
+  Player,
+  EQ3,
+  Filter,
+  PitchShift,
+  Chorus,
+  FeedbackDelay,
+  Reverb,
+} from 'tone';
 
 import appDeps from './dependencies';
 import AudioPlayer from './components/AudioPlayer';
@@ -9,6 +17,7 @@ import AudioPitch from './components/AudioPitch';
 import AudioChorus from './components/AudioChorus';
 import AudioMaster from './components/AudioMaster';
 import AudioDelay from './components/AudioDelay';
+import AudioReverb from './components/AudioReverb';
 
 const App: React.FC = () => {
   const [isPlayerLoaded, setPlayerLoaded] = useState<boolean>(false);
@@ -18,9 +27,11 @@ const App: React.FC = () => {
   const pitch = useRef<PitchShift>();
   const chorus = useRef<Chorus>();
   const delay = useRef<FeedbackDelay>();
+  const reverb = useRef<Reverb>();
 
   useEffect(() => {
     // Init app dependencies
+    reverb.current = appDeps.reverbFactory();
     delay.current = appDeps.delayFactory();
     chorus.current = appDeps.chorusFactory();
     pitch.current = appDeps.pitchFactory();
@@ -29,7 +40,14 @@ const App: React.FC = () => {
     player.current = appDeps.playerFactory(
       'heal-6.wav',
       () => setPlayerLoaded(true),
-      [eq.current, filter.current, pitch.current, chorus.current, delay.current]
+      [
+        eq.current,
+        filter.current,
+        pitch.current,
+        chorus.current,
+        delay.current,
+        reverb.current,
+      ]
     );
 
     player.current.set({loop: true});
@@ -59,6 +77,10 @@ const App: React.FC = () => {
           <AudioDelay
             delay={delay.current}
             controller={appDeps.delayController}
+          />
+          <AudioReverb
+            reverb={reverb.current}
+            controller={appDeps.reverbController}
           />
           <AudioMaster />
         </>
