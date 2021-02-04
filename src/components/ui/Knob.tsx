@@ -1,6 +1,6 @@
 // https://codepen.io/bbx/pen/QBKYOy?editors=1112
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import './Knob.scss';
 
@@ -46,6 +46,10 @@ const Knob: React.FC<KnobProps> = ({
   const [degree, setDegree] = useState(currentDeg);
   const [outputVal, setOutputVal] = useState(value);
 
+  useEffect(() => {
+    onChange(outputVal);
+  });
+
   const getDeg = (cX: number, cY: number, pts: {x: number; y: number}) => {
     const x = cX - pts.x;
     const y = cY - pts.y;
@@ -83,8 +87,6 @@ const Knob: React.FC<KnobProps> = ({
       document.removeEventListener('mousemove', moveHandler);
     });
   };
-
-  onChange(outputVal);
 
   const renderTicks = () => {
     let ticks = [];

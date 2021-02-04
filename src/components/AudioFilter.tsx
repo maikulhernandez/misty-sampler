@@ -13,7 +13,7 @@ interface AudioFilterProps {
 
 const AudioFilter: React.FC<AudioFilterProps> = ({filter, controller}) => {
   const [freq, setFreq] = useState(0);
-  const [adjustedFreq, setAdjustedFreq] = useState(0);
+  const [adjustedFreq, setAdjustedFreq] = useState(19);
   const [resonance, setResonance] = useState(0);
   const [filtType, setFiltType] = useState('highpass');
 
