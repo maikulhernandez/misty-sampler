@@ -46,6 +46,10 @@ const Knob: React.FC<KnobProps> = ({
   const [degree, setDegree] = useState(currentDeg);
   const [outputVal, setOutputVal] = useState(value);
 
+  useEffect(() => {
+    onChange(outputVal);
+  });
+
   const getDeg = (cX: number, cY: number, pts: {x: number; y: number}) => {
     const x = cX - pts.x;
     const y = cY - pts.y;
@@ -58,10 +62,6 @@ const Knob: React.FC<KnobProps> = ({
     let finalDeg = Math.min(Math.max(startAngle, degr), endAngle);
     return finalDeg;
   };
-
-  useEffect(() => {
-    onChange(outputVal);
-  });
 
   const startDrag = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -80,6 +80,7 @@ const Knob: React.FC<KnobProps> = ({
       setDegree(currentDeg);
       setOutputVal(knobOutputValue);
     };
+
     document.addEventListener('mousemove', moveHandler);
     // eslint-disable-next-line no-unused-vars
     document.addEventListener('mouseup', e => {

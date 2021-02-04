@@ -1,37 +1,31 @@
-import {useState} from 'react';
 import {Filter} from 'tone';
 
+export type FilterType = 'lowpass' | 'highpass' | 'bandpass';
+
 interface FilterState {
-  changeCutoff: (value: number) => void;
-  setFilterType: (value: 'lowpass' | 'highpass' | 'bandpass') => void;
-  setResAmount: (value: number) => void;
-  adjusted: number;
-  freqType: string;
+  handleParameterChange: (newParam: {}) => void;
+  convertRange: (value: number) => number;
 }
 
 export type FilterController = (props: {filter?: Filter}) => FilterState;
 
 export const useFilterController: FilterController = ({filter}) => {
-  const [adjusted, setAdjusted] = useState(0);
-  const [freqType, setFreqType] = useState('highpass');
+  const handleParameterChange = (newParam: {
+    frequency?: number;
+    Q?: number;
+    type?: FilterType;
+  }) => {
+    filter?.set({...newParam});
+  };
 
-  const changeCutoff = (value: number) => {
-    const max = Math.log(20000);
+  const convertRange = (value: number) => {
     const min = Math.log(20);
-    const cutoffFreq = Math.floor(Math.exp(min + value * (max - min)));
-
-    setAdjusted(cutoffFreq);
-    filter.set({frequency: cutoffFreq});
+    const max = Math.log(20000);
+    const newRange = Math.floor(Math.exp(min + value * (max - min)));
+    return newRange;
   };
 
-  const setFilterType = (value: 'lowpass' | 'highpass' | 'bandpass') => {
-    setFreqType(value);
-    filter.set({type: value});
-  };
+  console.log('filter');
 
-  const setResAmount = (value: number) => {
-    filter.set({Q: value});
-  };
-
-  return {changeCutoff, setFilterType, setResAmount, adjusted, freqType};
+  return {handleParameterChange, convertRange};
 };
