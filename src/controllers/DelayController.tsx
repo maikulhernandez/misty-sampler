@@ -1,22 +1,19 @@
 import {FeedbackDelay} from 'tone';
 
 interface DelayState {
-  handleWetSignalChange: (value: number) => void;
-  handleTimeChange: (value: number) => void;
-  handleFeedbackChange: (value: number) => void;
+  handleParameterChange: (newParam: {}) => void;
 }
 
 export type DelayController = (props: {delay?: FeedbackDelay}) => DelayState;
 
 export const useDelayController: DelayController = ({delay}) => {
-  const handleWetSignalChange = (value: number) => {
-    delay?.set({wet: value});
+  const handleParameterChange = (newParam: {
+    wet?: number;
+    delayTime?: number;
+    feedback?: number;
+  }) => {
+    delay?.set({...newParam});
   };
-  const handleTimeChange = (value: number) => {
-    delay?.set({delayTime: value});
-  };
-  const handleFeedbackChange = (value: number) => {
-    delay?.set({feedback: value});
-  };
-  return {handleWetSignalChange, handleTimeChange, handleFeedbackChange};
+
+  return {handleParameterChange};
 };

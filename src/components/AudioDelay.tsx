@@ -15,25 +15,21 @@ const AudioDelay: React.FC<AudioDelayProps> = ({delay, controller}) => {
   const [delayAmount, setDelayAmount] = useState(0);
   const [delayTime, setDelayTime] = useState(0);
   const [delayFeedback, setDelayFeedback] = useState(0);
-  const {
-    handleWetSignalChange,
-    handleTimeChange,
-    handleFeedbackChange,
-  } = controller({delay});
+  const {handleParameterChange} = controller({delay});
 
   const changeDelayAmount = (value: number) => {
     setDelayAmount(value);
-    handleWetSignalChange(value);
+    handleParameterChange({wet: value});
   };
 
   const changeDelayTime = (value: number) => {
     setDelayTime(value);
-    handleTimeChange(value);
+    handleParameterChange({delayTime: value});
   };
 
   const changeDelayFeedback = (value: number) => {
     setDelayFeedback(value);
-    handleFeedbackChange(value);
+    handleParameterChange({feedback: value});
   };
 
   return (

@@ -1,23 +1,19 @@
 import {EQ3} from 'tone';
 
 interface EqState {
-  handleLowChange: (value: number) => void;
-  handleMidChange: (value: number) => void;
-  handleHighChange: (value: number) => void;
+  handleLevelChange: (newLevel: {}) => void;
 }
 
 export type EqController = (props: {eq?: EQ3}) => EqState;
 
 export const useEqController: EqController = ({eq}) => {
-  const handleLowChange = (value: number) => {
-    eq?.set({low: value});
-  };
-  const handleMidChange = (value: number) => {
-    eq?.set({mid: value});
-  };
-  const handleHighChange = (value: number) => {
-    eq?.set({high: value});
+  const handleLevelChange = (newLevel: {
+    low?: number;
+    mid?: number;
+    high?: number;
+  }) => {
+    eq?.set({...newLevel});
   };
 
-  return {handleLowChange, handleMidChange, handleHighChange};
+  return {handleLevelChange};
 };

@@ -5,12 +5,7 @@ interface ChorusState {
   isActive: boolean;
   handleOnStart: () => void;
   handleOnStop: () => void;
-  handleWetSignalChange: (value: number) => void;
-  handleDepthChange: (value: number) => void;
-  handleSpreadChange: (value: number) => void;
-  handleFrequencyChange: (value: number) => void;
-  handleDelayChange: (value: number) => void;
-  handleFeedbackChange: (value: number) => void;
+  handleParameterChange: (newParam: {}) => void;
 }
 
 export type ChorusController = (props: {chorus?: Chorus}) => ChorusState;
@@ -27,34 +22,21 @@ export const useChorusController: ChorusController = ({chorus}) => {
     setIsActive(false);
   };
 
-  const handleWetSignalChange = (value: number) => {
-    chorus?.set({wet: value});
-  };
-  const handleDepthChange = (value: number) => {
-    chorus?.set({depth: value});
-  };
-  const handleSpreadChange = (value: number) => {
-    chorus?.set({spread: value});
-  };
-  const handleFrequencyChange = (value: number) => {
-    chorus?.set({frequency: value});
-  };
-  const handleDelayChange = (value: number) => {
-    chorus?.set({delayTime: value});
-  };
-  const handleFeedbackChange = (value: number) => {
-    chorus?.set({feedback: value});
+  const handleParameterChange = (newParam: {
+    wet?: number;
+    depth?: number;
+    spread?: number;
+    frequency?: number;
+    delayTime?: number;
+    feedback?: number;
+  }) => {
+    chorus?.set({...newParam});
   };
 
   return {
     isActive,
     handleOnStart,
     handleOnStop,
-    handleWetSignalChange,
-    handleDepthChange,
-    handleSpreadChange,
-    handleFrequencyChange,
-    handleDelayChange,
-    handleFeedbackChange,
+    handleParameterChange,
   };
 };

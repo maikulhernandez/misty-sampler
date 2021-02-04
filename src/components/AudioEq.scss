@@ -1,9 +1,10 @@
 .eq-knobs {
   display: flex;
   border: 1px solid black;
-  width: 32%;
+  width: 50%;
   margin-bottom: 15px;
   margin-top: 40px;
+  justify-content: space-around;
 
   .eq-knobs-low {
     margin: 10px;

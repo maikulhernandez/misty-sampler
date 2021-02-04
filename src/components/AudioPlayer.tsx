@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Player} from 'tone';
 import PropTypes from 'prop-types';
-import Fader from './ui/Fader';
+
 import {PlayerController} from '../controllers/PlayerController';
+import Fader from './ui/Fader';
 
 interface AudioPlayerProps {
   player: Player;

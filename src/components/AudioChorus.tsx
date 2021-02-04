@@ -23,43 +23,38 @@ const AudioChorus: React.FC<AudioChorusProps> = ({chorus, controller}) => {
     isActive,
     handleOnStart,
     handleOnStop,
-    handleWetSignalChange,
-    handleDepthChange,
-    handleSpreadChange,
-    handleFrequencyChange,
-    handleDelayChange,
-    handleFeedbackChange,
+    handleParameterChange,
   } = controller({chorus});
 
   const changeChorusAmount = (value: number) => {
     setChorusAmount(value);
-    handleWetSignalChange(value);
+    handleParameterChange({wet: value});
   };
 
   const changeChorusDepth = (value: number) => {
     setChorusDepth(value);
-    handleDepthChange(value);
+    handleParameterChange({depth: value});
   };
 
   const changeChorusSpread = (value: number) => {
     const roundedValue = Math.round(value);
     setChorusSpread(roundedValue);
-    handleSpreadChange(roundedValue);
+    handleParameterChange({spread: roundedValue});
   };
 
   const changeChorusFrequency = (value: number) => {
     setChorusFrequency(value);
-    handleFrequencyChange(value);
+    handleParameterChange({frequency: value});
   };
 
   const changeChorusDelay = (value: number) => {
     setChorusDelay(value);
-    handleDelayChange(value);
+    handleParameterChange({delay: value});
   };
 
   const changeChorusFeedback = (value: number) => {
     setChorusFeedback(value);
-    handleFeedbackChange(value);
+    handleParameterChange({feedback: value});
   };
 
   return (

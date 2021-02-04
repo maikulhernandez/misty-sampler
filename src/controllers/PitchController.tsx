@@ -10,5 +10,6 @@ export const usePitchController: PitchController = ({pitch}) => {
   const setPitchState = (value: number) => {
     pitch.set({pitch: value});
   };
+
   return {setPitchState};
 };
