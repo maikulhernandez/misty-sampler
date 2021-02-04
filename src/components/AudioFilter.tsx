@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {FilterController} from '../controllers/FilterController';
+import {FilterController, FilterType} from '../controllers/FilterController';
 import Knob from './ui/Knob';
 import {Filter} from 'tone';
 import './AudioFilter.scss';
@@ -13,30 +13,41 @@ interface AudioFilterProps {
 
 const AudioFilter: React.FC<AudioFilterProps> = ({filter, controller}) => {
   const [freq, setFreq] = useState(0);
+  const [adjustedFreq, setAdjustedFreq] = useState(0);
   const [resonance, setResonance] = useState(0);
-  const {
-    changeCutoff,
-    setFilterType,
-    setResAmount,
-    adjusted,
-    freqType,
-  } = controller({filter});
+  const [filtType, setFiltType] = useState('highpass');
+
+  const {handleParameterChange} = controller({filter});
+
+  const convertRange = (min: number, max: number, value: number) => {
+    const newMin = Math.log(min);
+    const newMax = Math.log(max);
+    const newRange = Math.floor(Math.exp(newMin + value * (newMax - newMin)));
+    return newRange;
+  };
 
   const changeFilterCutoff = (value: number) => {
+    const cutoffFrequency = convertRange(20, 20000, value);
     setFreq(value);
-    changeCutoff(value);
+    setAdjustedFreq(cutoffFrequency);
+    handleParameterChange({frequency: cutoffFrequency});
   };
 
   const changeResonance = (event: React.FormEvent<HTMLInputElement>) => {
     const parsedInput = parseFloat(event.currentTarget.value);
     setResonance(parsedInput);
-    setResAmount(parsedInput);
+    handleParameterChange({Q: parsedInput});
+  };
+
+  const changeFilterType = (value: FilterType) => {
+    setFiltType(value);
+    handleParameterChange({type: value});
   };
 
   return (
     <div className="filter-container">
       <div className="filter-knob">
-        <div className="filter-label">{freqType} Filter:</div>
+        <div className="filter-label">{filtType} Filter:</div>
         <Knob
           size={100}
           numTicks={150}
@@ -49,15 +60,15 @@ const AudioFilter: React.FC<AudioFilterProps> = ({filter, controller}) => {
       </div>
       <div className="filter-selector">
         <div>
-          <button onClick={() => setFilterType('highpass')}>Highpass</button>
+          <button onClick={() => changeFilterType('highpass')}>Highpass</button>
         </div>
         <div>
-          <button onClick={() => setFilterType('lowpass')}>Lowpass</button>
+          <button onClick={() => changeFilterType('lowpass')}>Lowpass</button>
         </div>
         <div>
-          <button onClick={() => setFilterType('bandpass')}>Bandpass</button>
+          <button onClick={() => changeFilterType('bandpass')}>Bandpass</button>
         </div>
-        {freqType === 'bandpass' ? (
+        {filtType === 'bandpass' ? (
           <div className="q-wrapper">
             <input
               type="range"
@@ -71,7 +82,7 @@ const AudioFilter: React.FC<AudioFilterProps> = ({filter, controller}) => {
         ) : (
           ''
         )}
-        <div>{adjusted} Hz</div>
+        <div>{adjustedFreq} Hz</div>
       </div>
     </div>
   );

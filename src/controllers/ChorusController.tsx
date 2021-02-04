@@ -33,6 +33,8 @@ export const useChorusController: ChorusController = ({chorus}) => {
     chorus?.set({...newParam});
   };
 
+  console.log('chorus');
+
   return {
     isActive,
     handleOnStart,

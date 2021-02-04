@@ -1,6 +1,6 @@
 // https://codepen.io/bbx/pen/QBKYOy?editors=1112
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import './BiDirKnob.scss';
 
@@ -59,10 +59,6 @@ const BiDirKnob: React.FC<BiDirKnobProps> = ({
     return finalDeg;
   };
 
-  useEffect(() => {
-    onChange(outputVal);
-  });
-
   const startDrag = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     const knob = e.currentTarget.getBoundingClientRect();
@@ -85,6 +81,8 @@ const BiDirKnob: React.FC<BiDirKnobProps> = ({
       document.removeEventListener('mousemove', moveHandler);
     });
   };
+
+  onChange(outputVal);
 
   const renderTicks = () => {
     let ticks = [];

@@ -36,5 +36,7 @@ export const usePlayerController: PlayerController = ({player}) => {
     player?.set({...setState});
   };
 
+  console.log('player');
+
   return {isPlaying, onStop, onPlay, onRestart, setAttribute};
 };

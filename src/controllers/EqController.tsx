@@ -15,5 +15,7 @@ export const useEqController: EqController = ({eq}) => {
     eq?.set({...newLevel});
   };
 
+  console.log('eq');
+
   return {handleLevelChange};
 };

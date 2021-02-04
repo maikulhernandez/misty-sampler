@@ -15,5 +15,7 @@ export const useDelayController: DelayController = ({delay}) => {
     delay?.set({...newParam});
   };
 
+  console.log('delay');
+
   return {handleParameterChange};
 };
