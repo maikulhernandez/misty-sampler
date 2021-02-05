@@ -1,0 +1,14 @@
+.volume-container {
+  border: 1px solid black;
+  width: 32%;
+  display: flex;
+  justify-content: left;
+  margin-bottom: 25px;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+
+  .volume-knob {
+    margin-left: 10%;
+    padding: 20px;
+  }
+}

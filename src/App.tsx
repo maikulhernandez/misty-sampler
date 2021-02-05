@@ -7,6 +7,7 @@ import {
   Chorus,
   FeedbackDelay,
   Reverb,
+  Volume,
 } from 'tone';
 
 import appDeps from './dependencies';
@@ -18,11 +19,13 @@ import AudioChorus from './components/AudioChorus';
 import AudioMaster from './components/AudioMaster';
 import AudioDelay from './components/AudioDelay';
 import AudioReverb from './components/AudioReverb';
+import AudioGain from './components/AudioGain';
 
 const App: React.FC = () => {
   const [isPlayerLoaded, setPlayerLoaded] = useState<boolean>(false);
   const player = useRef<Player>();
   const eq = useRef<EQ3>();
+  const gain = useRef<Volume>();
   const filter = useRef<Filter>();
   const pitch = useRef<PitchShift>();
   const chorus = useRef<Chorus>();
@@ -36,12 +39,14 @@ const App: React.FC = () => {
     chorus.current = appDeps.chorusFactory();
     pitch.current = appDeps.pitchFactory();
     filter.current = appDeps.filterFactory(0, 'highpass', -48);
+    gain.current = appDeps.gainFactory();
     eq.current = appDeps.eqFactory();
     player.current = appDeps.playerFactory(
       'heal-6.wav',
       () => setPlayerLoaded(true),
       [
         eq.current,
+        gain.current,
         filter.current,
         pitch.current,
         chorus.current,
@@ -62,6 +67,7 @@ const App: React.FC = () => {
             controller={appDeps.playerController}
           />
           <AudioEQ eq={eq.current} controller={appDeps.eqController} />
+          <AudioGain gain={gain.current} controller={appDeps.gainController} />
           <AudioFilter
             filter={filter.current}
             controller={appDeps.filterController}
