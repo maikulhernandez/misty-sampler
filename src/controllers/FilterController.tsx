@@ -25,7 +25,5 @@ export const useFilterController: FilterController = ({filter}) => {
     return newRange;
   };
 
-  console.log('filter');
-
   return {handleParameterChange, convertRange};
 };

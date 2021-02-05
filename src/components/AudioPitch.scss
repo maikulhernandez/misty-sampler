@@ -1,10 +1,13 @@
 .pitchshift-container {
   border: 1px solid black;
-  width: 32%;
+  width: 20%;
   justify-content: center;
   margin-bottom: 25px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+
   .pitchshift-knob {
-    margin-left: 40px;
-    padding: 20px;
+    margin-left: 10%;
+    padding: 15px;
   }
 }

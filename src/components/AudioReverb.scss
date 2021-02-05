@@ -2,14 +2,13 @@
   border: 1px solid black;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   margin-top: 20px;
   width: 45%;
+  font-family: 'Courier New', Courier, monospace;
 
   .reverb-title {
     margin: 10px 0 0 30px;
     font-size: 30px;
-    font-family: 'Courier New', Courier, monospace;
   }
   .reverb-row {
     display: flex;
@@ -18,14 +17,14 @@
     margin-bottom: 40px;
 
     &__amount {
-      margin: 10px 0;
+      margin: 10px;
     }
 
     &__preDelayTime {
-      margin: 10px 0;
+      margin: 10px;
     }
     &__decay {
-      margin: 10px 0;
+      margin: 10px;
     }
   }
 }

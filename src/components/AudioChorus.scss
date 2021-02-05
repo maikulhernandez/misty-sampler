@@ -5,27 +5,31 @@
   justify-content: space-around;
   width: 45%;
   margin-bottom: 15px;
+  font-family: 'Courier New', Courier, monospace;
 
   .chorus-title {
     margin: 10px 0 0 30px;
     font-size: 30px;
-    font-family: 'Courier New', Courier, monospace;
   }
   .chorus-button {
     margin: 20px 0 10px 30px;
+    button {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18px;
+    }
   }
   .chorus-top {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     &__amount {
-      margin: 10px 0;
+      margin: 10px;
     }
     &__depth {
-      margin: 10px 0;
+      margin: 10px;
     }
     &__spread {
-      margin: 10px 0;
+      margin: 10px;
     }
   }
   .chorus-bottom {
@@ -35,13 +39,13 @@
     flex-direction: row;
     justify-content: space-around;
     &__frequency {
-      margin: 10px 0;
+      margin: 10px;
     }
     &__delay {
-      margin: 10px 0;
+      margin: 10px;
     }
     &__feedback {
-      margin: 10px 0;
+      margin: 10px;
     }
   }
 }

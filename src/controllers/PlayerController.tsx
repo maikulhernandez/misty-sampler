@@ -1,8 +1,9 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Player} from 'tone';
 
 interface PlayerState {
   isPlaying: boolean;
+  duration: number;
   onStop: () => void;
   onPlay: () => void;
   onRestart: (value: number) => void;
@@ -13,6 +14,12 @@ export type PlayerController = (props: {player?: Player}) => PlayerState;
 
 export const usePlayerController: PlayerController = ({player}) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    setDuration(player.buffer.duration);
+    console.log('useEffect');
+  }, []);
 
   const onPlay = () => {
     player?.start();
@@ -36,5 +43,5 @@ export const usePlayerController: PlayerController = ({player}) => {
     player?.set({...setState});
   };
 
-  return {isPlaying, onStop, onPlay, onRestart, setAttribute};
+  return {isPlaying, duration, onStop, onPlay, onRestart, setAttribute};
 };

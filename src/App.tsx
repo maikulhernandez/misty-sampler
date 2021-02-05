@@ -66,8 +66,8 @@ const App: React.FC = () => {
             player={player.current}
             controller={appDeps.playerController}
           />
-          <AudioEQ eq={eq.current} controller={appDeps.eqController} />
           <AudioGain gain={gain.current} controller={appDeps.gainController} />
+          <AudioEQ eq={eq.current} controller={appDeps.eqController} />
           <AudioFilter
             filter={filter.current}
             controller={appDeps.filterController}
