@@ -1,20 +1,32 @@
 .eq-knobs {
-  display: flex;
   border: 1px solid black;
-  width: 50%;
-  margin-bottom: 15px;
-  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  width: 45%;
+  font-family: 'Courier New', Courier, monospace;
 
-  .eq-knobs-low {
-    margin: 10px;
+  .eq-knobs-title {
+    margin: 10px 0 0 30px;
+    font-size: 30px;
   }
-  .eq-knobs-mid {
-    margin: 10px;
-    margin-left: 50px;
-  }
-  .eq-knobs-high {
-    margin: 10px;
-    margin-left: 50px;
+
+  .eq-knobs-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    &__low {
+      margin: 10px;
+    }
+
+    &__mid {
+      margin: 10px;
+    }
+    &__high {
+      margin: 10px;
+    }
   }
 }

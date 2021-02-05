@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {PitchController} from '../controllers/PitchController';
 import BiDirKnob from './ui/BiDirKnob';
 import './AudioPitch.scss';
-// import Fader from './ui/Fader';
 
 interface AudioPitchProps {
   pitch: PitchShift;
@@ -26,22 +25,16 @@ const AudioPitch: React.FC<AudioPitchProps> = ({pitch, controller}) => {
   return (
     <div className="pitchshift-container">
       <div className="pitchshift-knob">
-        PitchShifter: {pitchShiftAmount}
+        Pitch: {pitchShiftAmount}
         <BiDirKnob
-          size={100}
-          numTicks={150}
+          size={50}
+          numTicks={75}
           degrees={260}
           min={-12}
           max={12}
           value={pitchShiftAmount}
           onChange={changePitchShiftAmount}
         />
-        {/* <Fader
-          min={-12}
-          max={12}
-          currentValue={pitchShiftAmount}
-          onChange={changePitchShiftAmount}
-        /> */}
       </div>
     </div>
   );

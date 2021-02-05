@@ -1,0 +1,26 @@
+.player {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  margin-bottom: 20px;
+
+  &__button {
+    margin: 10px 0 20px 10px;
+    button {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 20px;
+    }
+  }
+  &__playback {
+    margin: 10px;
+  }
+  &__loopStart {
+    margin: 10px;
+  }
+  &__loopEnd {
+    margin: 10px;
+    margin-bottom: 30px;
+  }
+}

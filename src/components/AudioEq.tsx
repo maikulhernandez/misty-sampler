@@ -37,41 +37,47 @@ const AudioEq: React.FC<AudioEqProps> = ({eq, controller}) => {
 
   return (
     <div className="eq-knobs">
-      <div className="eq-knobs-low">
-        Low: {lowLevel} dB
-        <BiDirKnob
-          size={75}
-          numTicks={150}
-          degrees={260}
-          min={-12}
-          max={12}
-          value={lowLevel}
-          onChange={changeLowEQ}
-        />
-      </div>
-      <div className="eq-knobs-mid">
-        Mid: {midLevel} dB
-        <BiDirKnob
-          size={75}
-          numTicks={150}
-          degrees={260}
-          min={-12}
-          max={12}
-          value={midLevel}
-          onChange={changeMidEQ}
-        />
-      </div>
-      <div className="eq-knobs-high">
-        High: {highLevel} dB
-        <BiDirKnob
-          size={75}
-          numTicks={150}
-          degrees={260}
-          min={-12}
-          max={12}
-          value={highLevel}
-          onChange={changeHighEQ}
-        />
+      <div className="eq-knobs-title">EQ3</div>
+      <div className="eq-knobs-row">
+        <div className="eq-knobs-row__low">
+          <div className="eq-knobs-row__low title">Low</div>
+          <BiDirKnob
+            size={50}
+            numTicks={75}
+            degrees={260}
+            min={-12}
+            max={12}
+            value={lowLevel}
+            onChange={changeLowEQ}
+          />
+          {lowLevel} dB
+        </div>
+        <div className="eq-knobs-row__mid">
+          <div className="eq-knobs-row__mid title">Mid</div>
+          <BiDirKnob
+            size={50}
+            numTicks={75}
+            degrees={260}
+            min={-12}
+            max={12}
+            value={midLevel}
+            onChange={changeMidEQ}
+          />
+          {midLevel} dB
+        </div>
+        <div className="eq-knobs-row__high">
+          <div className="eq-knobs-row__high title">High</div>
+          <BiDirKnob
+            size={50}
+            numTicks={75}
+            degrees={260}
+            min={-12}
+            max={12}
+            value={highLevel}
+            onChange={changeHighEQ}
+          />
+          {highLevel} dB
+        </div>
       </div>
     </div>
   );

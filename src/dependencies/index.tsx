@@ -13,6 +13,7 @@ import {
 } from 'tone';
 import {
   FilterController,
+  FilterType,
   useFilterController,
 } from '../controllers/FilterController';
 import {
@@ -57,7 +58,7 @@ interface AppDeps {
 
   filterFactory: (
     frequency: number,
-    type: 'lowpass' | 'highpass' | 'bandpass',
+    type: FilterType,
     rolloff: FilterRollOff
   ) => Filter;
   filterController: FilterController;
