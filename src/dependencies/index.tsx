@@ -9,6 +9,7 @@ import {
   Chorus,
   FeedbackDelay,
   Reverb,
+  Volume,
 } from 'tone';
 import {
   FilterController,
@@ -35,6 +36,7 @@ import {
   ReverbController,
   useReverbController,
 } from '../controllers/ReverbController';
+import {GainController, useGainController} from '../controllers/GainController';
 
 interface AppDeps {
   playerFactory: (
@@ -46,6 +48,9 @@ interface AppDeps {
 
   eqFactory: () => EQ3;
   eqController: EqController;
+
+  gainFactory: () => Volume;
+  gainController: GainController;
 
   pitchFactory: () => PitchShift;
   pitchController: PitchController;
@@ -74,6 +79,9 @@ const appDeps: AppDeps = {
 
   eqFactory: () => new EQ3(),
   eqController: useEqController,
+
+  gainFactory: () => new Volume(),
+  gainController: useGainController,
 
   filterFactory: (frequency, type, rolloff) =>
     new Filter(frequency, type, rolloff),
