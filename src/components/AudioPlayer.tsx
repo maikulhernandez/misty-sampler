@@ -51,9 +51,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
     setAttribute({loopEnd: value});
   };
 
-  const onFormChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    await setSample(e.target.files ?? undefined);
+    setSample(e.target.files ?? undefined);
   };
 
   return (

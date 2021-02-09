@@ -8,7 +8,7 @@ interface PlayerState {
   onPlay: () => void;
   onRestart: (value: number) => void;
   setAttribute: (setState: {}) => void;
-  setSample: (files?: FileList) => Promise<void>;
+  setSample: (files?: FileList) => void;
   currentSampleName: string;
 }
 
