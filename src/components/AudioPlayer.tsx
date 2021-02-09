@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {PlayerController} from '../controllers/PlayerController';
 import Fader from './ui/Fader';
 import './AudioPlayer.scss';
-
 interface AudioPlayerProps {
   player: Player;
   controller: PlayerController;
@@ -15,7 +14,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
   const [playbackRate, setPlaybackRate] = useState(1);
   const [loopStart, setLoopStart] = useState(0);
   const [loopEnd, setLoopEnd] = useState(0);
-  const [inputValue, setInputValue] = useState('');
   const {
     isPlaying,
     duration,
@@ -24,6 +22,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
     onRestart,
     setAttribute,
     setSample,
+    currentSampleName,
   } = controller({
     player,
   });
@@ -55,12 +54,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
   // this should be in the controller
   const onFormChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    // @ts-ignore
-    setInputValue(e.target.value);
-    // @ts-ignore
-    // should also be done in the controller, just dont know what type to use here
-    const fileURl = URL.createObjectURL(e.target.files[0]);
-    await setSample(fileURl);
+    await setSample(e.target.files ?? undefined);
   };
 
   return (
@@ -72,13 +66,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
           <button onClick={handleOnPlay}>play</button>
         )}
       </div>
-      upload audio file test
-      <input
-        type="file"
-        accept="audio/*"
-        value={inputValue}
-        onChange={onFormChange}
-      />
+      <input type="file" accept="audio/*" onChange={onFormChange} />
+      {currentSampleName ?? 'No sample set'}
       <div className="player__playback">
         Playback Rate:
         <Fader

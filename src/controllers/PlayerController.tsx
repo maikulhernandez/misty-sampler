@@ -8,7 +8,8 @@ interface PlayerState {
   onPlay: () => void;
   onRestart: (value: number) => void;
   setAttribute: (setState: {}) => void;
-  setSample: (url: string) => Promise<void>;
+  setSample: (files?: FileList) => Promise<void>;
+  currentSampleName: string;
 }
 
 export type PlayerController = (props: {player?: Player}) => PlayerState;
@@ -16,6 +17,7 @@ export type PlayerController = (props: {player?: Player}) => PlayerState;
 export const usePlayerController: PlayerController = ({player}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
+  const [currentSampleName, setSampleName] = useState('');
 
   useEffect(() => {
     setDuration(player?.buffer?.duration ?? 0);
@@ -44,8 +46,13 @@ export const usePlayerController: PlayerController = ({player}) => {
     player?.set({...setState});
   };
 
-  const setSample = async (url: string) => {
-    await player?.load(url);
+  const setSample = async (files?: FileList) => {
+    if (files && Array.from(files).length > 0) {
+      const fileName = files[0].name;
+      await player
+        ?.load(URL.createObjectURL(files[0]))
+        .then(() => setSampleName(fileName));
+    }
   };
 
   return {
@@ -56,5 +63,6 @@ export const usePlayerController: PlayerController = ({player}) => {
     onRestart,
     setAttribute,
     setSample,
+    currentSampleName,
   };
 };
