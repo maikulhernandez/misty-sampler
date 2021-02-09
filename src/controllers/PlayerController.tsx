@@ -8,6 +8,7 @@ interface PlayerState {
   onPlay: () => void;
   onRestart: (value: number) => void;
   setAttribute: (setState: {}) => void;
+  setSample: (url: string) => Promise<void>;
 }
 
 export type PlayerController = (props: {player?: Player}) => PlayerState;
@@ -17,7 +18,7 @@ export const usePlayerController: PlayerController = ({player}) => {
   const [duration, setDuration] = useState(0);
 
   useEffect(() => {
-    setDuration(player.buffer.duration);
+    setDuration(player?.buffer?.duration ?? 0);
     console.log('useEffect');
   }, []);
 
@@ -43,5 +44,17 @@ export const usePlayerController: PlayerController = ({player}) => {
     player?.set({...setState});
   };
 
-  return {isPlaying, duration, onStop, onPlay, onRestart, setAttribute};
+  const setSample = async (url: string) => {
+    await player?.load(url);
+  };
+
+  return {
+    isPlaying,
+    duration,
+    onStop,
+    onPlay,
+    onRestart,
+    setAttribute,
+    setSample,
+  };
 };

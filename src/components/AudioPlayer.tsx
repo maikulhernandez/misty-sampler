@@ -15,8 +15,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
   const [playbackRate, setPlaybackRate] = useState(1);
   const [loopStart, setLoopStart] = useState(0);
   const [loopEnd, setLoopEnd] = useState(0);
-  const [formValue, setFormValue] = useState('');
-  const [file, setFileValue] = useState();
+  const [inputValue, setInputValue] = useState('');
   const {
     isPlaying,
     duration,
@@ -24,6 +23,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
     onStop,
     onRestart,
     setAttribute,
+    setSample,
   } = controller({
     player,
   });
@@ -53,18 +53,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
   };
 
   // this should be in the controller
-  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFormChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     // @ts-ignore
-    setFormValue(e.target.value);
+    setInputValue(e.target.value);
     // @ts-ignore
-    setFileValue(e.target.files[0]);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    // call service here
-    console.log(file);
+    // should also be done in the controller, just dont know what type to use here
+    const fileURl = URL.createObjectURL(e.target.files[0]);
+    await setSample(fileURl);
   };
 
   return (
@@ -76,18 +72,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
           <button onClick={handleOnPlay}>play</button>
         )}
       </div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          upload audio file test
-          <input
-            type="file"
-            accept="audio/*"
-            value={formValue}
-            onChange={onFormChange}
-          />
-        </label>
-        <button type={'submit'}>Upload</button>
-      </form>
+      upload audio file test
+      <input
+        type="file"
+        accept="audio/*"
+        value={inputValue}
+        onChange={onFormChange}
+      />
       <div className="player__playback">
         Playback Rate:
         <Fader
