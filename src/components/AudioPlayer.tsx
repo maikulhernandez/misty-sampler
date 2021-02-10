@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {PlayerController} from '../controllers/PlayerController';
 import Fader from './ui/Fader';
 import './AudioPlayer.scss';
-
 interface AudioPlayerProps {
   player: Player;
   controller: PlayerController;
@@ -22,6 +21,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
     onStop,
     onRestart,
     setAttribute,
+    setSample,
+    currentSampleName,
   } = controller({
     player,
   });
@@ -50,9 +51,28 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
     setAttribute({loopEnd: value});
   };
 
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSample(e.target.files ?? undefined);
+  };
+
   return (
     <div className="player">
+      <div className="player__upload">
+        <input
+          type="file"
+          name="file"
+          id="file"
+          accept="audio/*"
+          onChange={onFormChange}
+        />
+        <label htmlFor="file">Drag a file here or click to upload audio</label>
+      </div>
       <div className="player__button">
+        <div className="player__sampleName">
+          {currentSampleName ?? 'No sample set'}
+        </div>
+
         {isPlaying ? (
           <button onClick={handleOnStop}>stop</button>
         ) : (
