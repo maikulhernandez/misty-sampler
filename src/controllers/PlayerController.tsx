@@ -17,12 +17,11 @@ export type PlayerController = (props: {player?: Player}) => PlayerState;
 export const usePlayerController: PlayerController = ({player}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
-  const [currentSampleName, setSampleName] = useState('');
+  const [currentSampleName, setSampleName] = useState('heal-6.wav');
 
   useEffect(() => {
     setDuration(player?.buffer?.duration ?? 0);
-    console.log('useEffect');
-  }, []);
+  }, [currentSampleName]);
 
   const onPlay = () => {
     player?.start();
@@ -52,6 +51,9 @@ export const usePlayerController: PlayerController = ({player}) => {
       await player
         ?.load(URL.createObjectURL(files[0]))
         .then(() => setSampleName(fileName));
+      player?.stop();
+      player?.start();
+      setIsPlaying(true);
     }
   };
 

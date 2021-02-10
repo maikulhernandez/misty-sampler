@@ -58,15 +58,27 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
 
   return (
     <div className="player">
+      <div className="player__upload">
+        <input
+          type="file"
+          name="file"
+          id="file"
+          accept="audio/*"
+          onChange={onFormChange}
+        />
+        <label htmlFor="file">Drag a file here or click to upload audio</label>
+      </div>
       <div className="player__button">
+        <div className="player__sampleName">
+          {currentSampleName ?? 'No sample set'}
+        </div>
+
         {isPlaying ? (
           <button onClick={handleOnStop}>stop</button>
         ) : (
           <button onClick={handleOnPlay}>play</button>
         )}
       </div>
-      <input type="file" accept="audio/*" onChange={onFormChange} />
-      {currentSampleName ?? 'No sample set'}
       <div className="player__playback">
         Playback Rate:
         <Fader
