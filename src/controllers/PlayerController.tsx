@@ -51,8 +51,7 @@ export const usePlayerController: PlayerController = ({player}) => {
       await player
         ?.load(URL.createObjectURL(files[0]))
         .then(() => setSampleName(fileName));
-      player?.stop();
-      player?.start();
+      player?.restart();
       setIsPlaying(true);
     }
   };
