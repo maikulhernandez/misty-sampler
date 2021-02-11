@@ -12,14 +12,14 @@ import {
 
 import appDeps from './dependencies';
 import AudioPlayer from './components/AudioPlayer';
-import AudioEQ from './components/AudioEq';
-import AudioFilter from './components/AudioFilter';
-import AudioPitch from './components/AudioPitch';
-import AudioChorus from './components/AudioChorus';
+import AudioEQ from './components/utility/AudioEq';
+import AudioGain from './components/utility/AudioGain';
+import AudioFilter from './components/utility/AudioFilter';
+import AudioPitch from './components/effects/AudioPitch';
+import AudioChorus from './components/effects/AudioChorus';
+import AudioDelay from './components/effects/AudioDelay';
+import AudioReverb from './components/effects/AudioReverb';
 import AudioMaster from './components/AudioMaster';
-import AudioDelay from './components/AudioDelay';
-import AudioReverb from './components/AudioReverb';
-import AudioGain from './components/AudioGain';
 
 const App: React.FC = () => {
   const [isPlayerLoaded, setPlayerLoaded] = useState<boolean>(false);

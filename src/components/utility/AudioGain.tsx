@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Volume} from 'tone';
 import PropTypes from 'prop-types';
 
-import {GainController} from '../controllers/GainController';
-import BiDirKnob from './ui/BiDirKnob';
+import {GainController} from '../../controllers/GainController';
+import BiDirKnob from '../ui/BiDirKnob';
 import './AudioGain.scss';
 
 interface AudioGainProps {
