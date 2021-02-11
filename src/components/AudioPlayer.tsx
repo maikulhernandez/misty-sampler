@@ -21,6 +21,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
     onStop,
     onRestart,
     setAttribute,
+    setIsReversed,
     setSample,
     currentSampleName,
   } = controller({
@@ -37,7 +38,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
 
   const handlePlaybackChange = (value: number) => {
     setPlaybackRate(value);
-    setAttribute({playbackRate: value});
+    if (value >= 0) {
+      setIsReversed(false);
+      setAttribute({playbackRate: value});
+    } else {
+      setIsReversed(true);
+      setAttribute({playbackRate: Math.abs(value)});
+    }
   };
 
   const handleLoopStartChange = (value: number) => {
@@ -82,7 +89,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({player, controller}) => {
       <div className="player__playback">
         Playback Rate:
         <Fader
-          min={0}
+          min={-3}
           max={3}
           step={0.01}
           currentValue={playbackRate}

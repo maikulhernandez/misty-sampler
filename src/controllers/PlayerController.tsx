@@ -7,8 +7,9 @@ interface PlayerState {
   onStop: () => void;
   onPlay: () => void;
   onRestart: (value: number) => void;
-  setAttribute: (setState: {}) => void;
+  setAttribute: (setProp: {}) => void;
   setSample: (files?: FileList) => void;
+  setIsReversed: (value: boolean) => void;
   currentSampleName: string;
 }
 
@@ -16,6 +17,7 @@ export type PlayerController = (props: {player?: Player}) => PlayerState;
 
 export const usePlayerController: PlayerController = ({player}) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isReversed, setIsReversed] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentSampleName, setSampleName] = useState('heal-6.wav');
 
@@ -37,12 +39,13 @@ export const usePlayerController: PlayerController = ({player}) => {
     player?.restart(loopStart);
   };
 
-  const setAttribute = (setState: {
+  const setAttribute = (setProp: {
     playbackRate?: number;
     loopStart?: number;
     loopEnd?: number;
   }) => {
-    player?.set({...setState});
+    player?.set({...setProp});
+    player.reverse = isReversed;
   };
 
   const setSample = async (files?: FileList) => {
@@ -51,8 +54,12 @@ export const usePlayerController: PlayerController = ({player}) => {
       await player
         ?.load(URL.createObjectURL(files[0]))
         .then(() => setSampleName(fileName));
-      player?.restart();
-      setIsPlaying(true);
+      if (isPlaying) {
+        player?.restart();
+      } else {
+        player?.start();
+        setIsPlaying(true);
+      }
     }
   };
 
@@ -64,6 +71,7 @@ export const usePlayerController: PlayerController = ({player}) => {
     onRestart,
     setAttribute,
     setSample,
+    setIsReversed,
     currentSampleName,
   };
 };
