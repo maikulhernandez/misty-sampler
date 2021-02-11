@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Chorus} from 'tone';
 import PropTypes from 'prop-types';
 
-import {ChorusController} from '../controllers/ChorusController';
-import Knob from './ui/Knob';
+import {ChorusController} from '../../controllers/ChorusController';
+import Knob from '../ui/Knob';
 import './AudioChorus.scss';
 
 interface AudioChorusProps {

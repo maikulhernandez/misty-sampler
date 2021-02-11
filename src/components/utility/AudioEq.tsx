@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {EqController} from '../controllers/EqController';
-import BiDirKnob from './ui/BiDirKnob';
+import {EqController} from '../../controllers/EqController';
+import BiDirKnob from '../ui/BiDirKnob';
 import {EQ3} from 'tone';
 import './AudioEq.scss';
 

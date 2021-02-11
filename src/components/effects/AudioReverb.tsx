@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Reverb} from 'tone';
 import PropTypes from 'prop-types';
 
-import {ReverbController} from '../controllers/ReverbController';
-import Knob from './ui/Knob';
+import {ReverbController} from '../../controllers/ReverbController';
+import Knob from '../ui/Knob';
 import './AudioReverb.scss';
 
 interface AudioReverbProps {

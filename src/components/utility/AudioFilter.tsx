@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {FilterController, FilterType} from '../controllers/FilterController';
-import Knob from './ui/Knob';
+import {FilterController, FilterType} from '../../controllers/FilterController';
+import Knob from '../ui/Knob';
 import {Filter} from 'tone';
 import './AudioFilter.scss';
 

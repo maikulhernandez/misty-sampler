@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {PitchShift} from 'tone';
 import PropTypes from 'prop-types';
 
-import {PitchController} from '../controllers/PitchController';
-import BiDirKnob from './ui/BiDirKnob';
+import {PitchController} from '../../controllers/PitchController';
+import BiDirKnob from '../ui/BiDirKnob';
 import './AudioPitch.scss';
 
 interface AudioPitchProps {

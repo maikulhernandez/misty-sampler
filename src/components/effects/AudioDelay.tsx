@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {FeedbackDelay} from 'tone';
 import PropTypes from 'prop-types';
 
-import {DelayController} from '../controllers/DelayController';
-import Knob from './ui/Knob';
+import {DelayController} from '../../controllers/DelayController';
+import Knob from '../ui/Knob';
 import './AudioDelay.scss';
 
 interface AudioDelayProps {
