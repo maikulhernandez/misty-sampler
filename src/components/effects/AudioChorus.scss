@@ -1,3 +1,5 @@
+@import "../../App.scss";
+
 .chorus {
   border: 1px solid black;
   display: flex;
@@ -5,7 +7,9 @@
   justify-content: space-around;
   width: 45%;
   margin-bottom: 15px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $primary-font-type;
+  color: $primary-font-color;
+  background-color: $component-bkg-clr;
 
   .chorus-title {
     margin: 10px 0 0 30px;
@@ -14,8 +18,10 @@
   .chorus-button {
     margin: 20px 0 10px 30px;
     button {
-      font-family: 'Courier New', Courier, monospace;
+      font-family: $primary-font-type;
       font-size: 18px;
+      background-color: $btn-clr;
+      color: $primary-font-color;
     }
   }
   .chorus-top {

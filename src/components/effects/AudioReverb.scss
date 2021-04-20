@@ -1,10 +1,14 @@
+@import "../../App.scss";
+
 .reverb {
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
   width: 45%;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $primary-font-type;
+  color: $primary-font-color;
+  background-color: $component-bkg-clr;
 
   .reverb-title {
     margin: 10px 0 0 30px;

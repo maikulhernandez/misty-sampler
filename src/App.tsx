@@ -10,6 +10,7 @@ import {
   Volume,
 } from 'tone';
 
+import './App.scss';
 import appDeps from './dependencies';
 import AudioPlayer from './components/AudioPlayer';
 import AudioEQ from './components/utility/AudioEq';
@@ -62,33 +63,56 @@ const App: React.FC = () => {
     <div>
       {isPlayerLoaded ? (
         <>
-          <AudioPlayer
-            player={player.current}
-            controller={appDeps.playerController}
-          />
-          <AudioGain gain={gain.current} controller={appDeps.gainController} />
-          <AudioEQ eq={eq.current} controller={appDeps.eqController} />
-          <AudioFilter
-            filter={filter.current}
-            controller={appDeps.filterController}
-          ></AudioFilter>
-          <AudioPitch
-            pitch={pitch.current}
-            controller={appDeps.pitchController}
-          />
-          <AudioChorus
-            chorus={chorus.current}
-            controller={appDeps.chorusController}
-          />
-          <AudioDelay
-            delay={delay.current}
-            controller={appDeps.delayController}
-          />
-          <AudioReverb
-            reverb={reverb.current}
-            controller={appDeps.reverbController}
-          />
-          <AudioMaster />
+          <div className="container">
+            <div id="player">
+              <AudioPlayer
+                player={player.current}
+                controller={appDeps.playerController}
+              />
+            </div>
+            <div id="gain">
+              <AudioGain
+                gain={gain.current}
+                controller={appDeps.gainController}
+              />
+            </div>
+            <div id="eq">
+              <AudioEQ eq={eq.current} controller={appDeps.eqController} />
+            </div>
+            <div id="filter">
+              <AudioFilter
+                filter={filter.current}
+                controller={appDeps.filterController}
+              />
+            </div>
+            <div id="pitch">
+              <AudioPitch
+                pitch={pitch.current}
+                controller={appDeps.pitchController}
+              />
+            </div>
+            <div id="chorus">
+              <AudioChorus
+                chorus={chorus.current}
+                controller={appDeps.chorusController}
+              />
+            </div>
+            <div id="delay">
+              <AudioDelay
+                delay={delay.current}
+                controller={appDeps.delayController}
+              />
+            </div>
+            <div id="reverb">
+              <AudioReverb
+                reverb={reverb.current}
+                controller={appDeps.reverbController}
+              />
+            </div>
+            <div id="master">
+              <AudioMaster />
+            </div>
+          </div>
         </>
       ) : (
         'loading...'

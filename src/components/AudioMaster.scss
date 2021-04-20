@@ -1,9 +1,13 @@
+@import "../App.scss";
+
 .master-fader {
   border: 1px solid black;
   margin: 20px 0 100px 0;
-  font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: column;
+  font-family: $primary-font-type;
+  color: $primary-font-color;
+  background-color: $component-bkg-clr;
 
   &__title {
     font-size: 25px;

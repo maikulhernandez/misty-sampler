@@ -37,7 +37,7 @@ const AudioEq: React.FC<AudioEqProps> = ({eq, controller}) => {
 
   return (
     <div className="eq-knobs">
-      <div className="eq-knobs-title">EQ3</div>
+      <div className="eq-knobs-label">EQ3</div>
       <div className="eq-knobs-row">
         <div className="eq-knobs-row__low">
           <div className="eq-knobs-row__low title">Low</div>

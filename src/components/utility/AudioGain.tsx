@@ -24,7 +24,7 @@ const AudioGain: React.FC<AudioGainProps> = ({gain, controller}) => {
   return (
     <div className="volume-container">
       <div className="volume-knob">
-        Gain: {gainAmount} dB
+        <div className="volume-label">Gain: {gainAmount} dB</div>
         <BiDirKnob
           size={50}
           numTicks={75}

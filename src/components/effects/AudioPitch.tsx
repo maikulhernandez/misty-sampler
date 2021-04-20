@@ -25,7 +25,7 @@ const AudioPitch: React.FC<AudioPitchProps> = ({pitch, controller}) => {
   return (
     <div className="pitchshift-container">
       <div className="pitchshift-knob">
-        Pitch: {pitchShiftAmount}
+        <div className="pitchshift-label">Pitch: {pitchShiftAmount}</div> 
         <BiDirKnob
           size={50}
           numTicks={75}

@@ -133,7 +133,6 @@ const BiDirKnob: React.FC<BiDirKnobProps> = ({
   iStyle.transform = 'rotate(' + degree + 'deg)';
 
   return (
-    <div className="container">
       <div className="knob" style={kStyle}>
         <div className="ticks">
           {numTicks
@@ -158,7 +157,6 @@ const BiDirKnob: React.FC<BiDirKnobProps> = ({
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

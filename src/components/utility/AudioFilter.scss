@@ -1,10 +1,14 @@
+@import "../../App.scss";
+
 .filter-container {
   border: 1px solid black;
   margin-bottom: 20px;
   width: 45%;
   display: flex;
   justify-content: space-around;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $primary-font-type;
+  color: $primary-font-color;
+  background-color: $component-bkg-clr;
 
   .filter-label {
     margin-bottom: 20px;
@@ -22,8 +26,10 @@
       margin: 15px;
     }
     button {
-      font-family: 'Courier New', Courier, monospace;
+      font-family: $primary-font-type;
       font-size: 17px;
+      background-color: $btn-clr;
+      color: $primary-font-color;
     }
   }
 }

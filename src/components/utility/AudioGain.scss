@@ -1,14 +1,23 @@
+@import "../../App.scss";
+
 .volume-container {
   border: 1px solid black;
   width: 20%;
   display: flex;
   justify-content: left;
-  margin-bottom: 25px;
-  font-size: 20px;
-  font-family: 'Courier New', Courier, monospace;
+  margin-bottom: 20px;
+  font-family: $primary-font-type;
+  color: $primary-font-color;
+  background-color: $component-bkg-clr;
+
+  .volume-label {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
 
   .volume-knob {
     margin-left: 10%;
     padding: 10px;
+    margin-bottom: 40px;
   }
 }

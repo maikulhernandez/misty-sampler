@@ -1,8 +1,12 @@
+@import "../App.scss";
+
 .player {
   border: 1px solid black;
   display: flex;
   flex-direction: column;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $primary-font-type;
+  color: $primary-font-color;
+  background-color: $component-bkg-clr;
   font-size: 20px;
   margin-bottom: 20px;
 
@@ -11,6 +15,8 @@
     button {
       font-family: 'Courier New', Courier, monospace;
       font-size: 20px;
+      background-color: $btn-clr;
+      color: $primary-font-color;
     }
   }
   &__upload {
@@ -26,7 +32,7 @@
     }
     label {
       display: inline-block;
-      border: 1px dashed black;
+      border: 1px dashed $primary-font-color;
       padding: 40px 10% 40px 40px;
       cursor: pointer;
     }

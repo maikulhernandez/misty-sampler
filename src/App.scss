@@ -1,0 +1,11 @@
+// app-wide variables
+$primary-font-type: 'Courier New', Courier, monospace;
+$primary-font-color: #B9B7B7;
+$component-bkg-clr: #1A1717;
+$app-bkg-clr: #323030;
+$btn-clr: #493F3F;
+
+.container {
+  background-color: $app-bkg-clr;
+  padding: 10px;
+}
